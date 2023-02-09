@@ -1,14 +1,14 @@
-import { withTRPC } from '@trpc/next';
-import type { AppProps } from 'next/app';
-import { AppRouter } from './api/trpc/[trpc]';
+import { withTRPC } from "@trpc/next";
+import type { AppProps } from "next/app";
+import { AppRouter } from "../backend/router";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return <Component {...pageProps} />;
 }
 
 function getBaseUrl() {
-  if (typeof window !== 'undefined') {
-    return '';
+  if (typeof window !== "undefined") {
+    return "";
   }
   // reference for vercel.com
   if (process.env.VERCEL_URL) {
