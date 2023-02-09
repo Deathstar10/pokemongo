@@ -1,16 +1,18 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import { trpc } from "../utils/trpc"
+import type { NextPage } from "next";
+import { trpc } from "../utils/trpc";
+import { GetServerSideProps } from "next";
+import getRandomPokemon from "../utils/getRandomPokemon";
 
 export default function IndexPage() {
-  const hello = trpc.useQuery(["hello"]);
-  
-  if(!hello.data) return <div>Loading.....</div>
+  const { data, isLoading } = trpc.useQuery(["get-pokemon-by-id", { id: 49 }]);
 
-  return ( 
+  if (isLoading) return <div>Loading.....</div>;
+
+  if (data) return <div>{data.name}</div>;
+
+  return (
     <div>
-      <p>{hello.data.greeting}</p>
+      <p>Hello Pokemon</p>
     </div>
-  )
+  );
 }
